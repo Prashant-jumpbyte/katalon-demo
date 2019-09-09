@@ -14,18 +14,30 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
+def info = WebUI.callTestCase(findTestCase('PrepareData'), [:], FailureHandling.STOP_ON_FAILURE)
+
+def Email = info.Email
+
+def Password = info.Password
+
+def Status = info.Status
+
+def Type = info.Type
+
 WebUI.openBrowser('')
 
 WebUI.navigateToUrl('http://ec2-3-214-106-151.compute-1.amazonaws.com/login')
 
-WebUI.setText(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/input_Email_email'), 'dhaval.b.nagar@gmail.com')
+WebUI.setText(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/input_Email_email'), Email)
 
-WebUI.setEncryptedText(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/input_Password_password'), 'aeHFOx8jV/A=')
+WebUI.setText(findTestObject('Page_SOSI1/input_Password_password'), Password)
 
 WebUI.click(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/button_Login'))
 
 WebUI.verifyElementPresent(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/span_Dhaval Nagar_caret'), 
     0)
+
+WebUI.delay(3)
 
 WebUI.verifyElementClickable(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/span_Dhaval Nagar_caret'))
 
@@ -33,19 +45,26 @@ WebUI.click(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/
 
 WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/a_Court Operations'))
 
+WebUI.delay(2)
+
 WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_FINFacility IN'))
 
-WebUI.setText(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/input_ECOI_checkInEcoiId'), '6503003')
+WebUI.setText(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/input_ECOI_checkInEcoiId'), '6487449')
 
 WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_Submit'))
 
-WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/span_ECOI 6503003 Facility IN successful'))
+WebUI.verifyElementPresent(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/span_ECOI 6503003 Facility IN successful'), 
+    0)
 
 WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_Close'))
 
+
+WebUI.delay(3)
+
+
 WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_FOUTFacility OUT'))
 
-WebUI.setText(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/input_ECOI_checkOutEcoiId'), '6503003')
+WebUI.setText(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/input_ECOI_checkOutEcoiId'), '6487449')
 
 WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_Facility OUT'))
 
@@ -92,9 +111,12 @@ WebUI.setEncryptedText(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOS
 
 WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_Submit_2'))
 
-WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/span_ECOI 6503003 Facility OUT Successful'))
+WebUI.verifyElementPresent(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/span_ECOI 6503003 Facility OUT Successful'), 
+    0)
 
-WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_Close'))
+WebUI.delay(1)
+
+//WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_Close'))
 
 WebUI.closeBrowser()
 

@@ -9,6 +9,14 @@
          <key>XPATH</key>
          <value>//a[@id='userMenu']/span[2]</value>
       </entry>
+      <entry>
+         <key>CSS</key>
+         <value></value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value></value>
+      </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
@@ -25,13 +33,6 @@
       <name>class</name>
       <type>Main</type>
       <value>caret</value>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>xpath</name>
-      <type>Main</type>
-      <value>id(&quot;userMenu&quot;)/span[@class=&quot;caret&quot;]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

@@ -8,34 +8,23 @@ import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
 import com.kms.katalon.core.model.FailureHandling as FailureHandling
 import com.kms.katalon.core.testcase.TestCase as TestCase
 import com.kms.katalon.core.testdata.TestData as TestData
+import com.kms.katalon.core.testdata.TestDataFactory as TestDataFactory
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
-import org.openqa.selenium.Keys as Keys
 
-def info = WebUI.callTestCase(findTestCase('PrepareData'), [:], FailureHandling.STOP_ON_FAILURE)
+def info = [('Email') : '', ('Password') : '', ('Status') : '', ('Type') : '']
 
-def Email = info.Email
+def data = TestDataFactory.findTestData('Data Files/Sosi1_data')
 
-def Password = info.Password
+info.Email = data.getValue(1, 1)
 
-def Status = info.Status
+info.Password = data.getValue(2, 1)
 
-def Type = info.Type
+info.Status = data.getValue(3, 1)
 
-WebUI.openBrowser('')
+info.Type = data.getValue(3, 1)
 
-WebUI.navigateToUrl('http://ec2-3-214-106-151.compute-1.amazonaws.com/login')
-
-WebUI.setText(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/input_Email_email'), Email)
-
-WebUI.setText(findTestObject('Page_SOSI1/input_Password_password'), Password)
-
-WebUI.click(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/button_Login'))
-
-WebUI.verifyElementPresent(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/span_Dhaval Nagar_caret'), 
-    0)
-
-WebUI.closeBrowser()
+return info
 

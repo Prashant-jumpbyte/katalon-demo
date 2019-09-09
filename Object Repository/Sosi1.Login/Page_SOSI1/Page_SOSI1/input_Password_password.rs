@@ -6,14 +6,22 @@
    <elementGuidId>c5d78d0b-a2bb-4d2a-95d0-11686562112d</elementGuidId>
    <selectorCollection>
       <entry>
+         <key>BASIC</key>
+         <value>//input[@type = 'password' and @name = 'password' and @class = 'form-control ng-untouched ng-dirty ng-valid-parse ng-valid ng-valid-required' and @placeholder = 'Your password']</value>
+      </entry>
+      <entry>
          <key>XPATH</key>
          <value>//input[@name='password']</value>
       </entry>
+      <entry>
+         <key>CSS</key>
+         <value></value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>tag</name>
       <type>Main</type>
@@ -34,7 +42,7 @@
       <value>password</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>false</isSelected>
+      <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
       <name>class</name>
       <type>Main</type>

@@ -9,8 +9,16 @@
          <key>XPATH</key>
          <value>//a[contains(text(),'Court Operations')]</value>
       </entry>
+      <entry>
+         <key>CSS</key>
+         <value></value>
+      </entry>
+      <entry>
+         <key>BASIC</key>
+         <value>//*[@href = '/my/dashboard/office-operations']</value>
+      </entry>
    </selectorCollection>
-   <selectorMethod>XPATH</selectorMethod>
+   <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
    <webElementProperties>
       <isSelected>false</isSelected>
@@ -41,7 +49,7 @@
       <value>/my/dashboard/office-operations</value>
    </webElementProperties>
    <webElementProperties>
-      <isSelected>true</isSelected>
+      <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>text</name>
       <type>Main</type>
@@ -52,7 +60,7 @@
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html[@class=&quot;no-js ng-scope&quot;]/body[1]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;layout-content ng-scope&quot;]/div[@class=&quot;ng-scope&quot;]/div[1]/div[@class=&quot;ng-scope&quot;]/div[@class=&quot;navbar ng-scope&quot;]/div[@class=&quot;container&quot;]/div[@class=&quot;row&quot;]/div[@class=&quot;col-xs-4 verticle-center&quot;]/ul[@class=&quot;nav navbar-nav&quot;]/li[@class=&quot;pull-right dropdown open&quot;]/ul[@class=&quot;dropdown-menu&quot;]/li[@class=&quot;ng-scope ng-isolate-scope&quot;]/a[@class=&quot;ng-scope&quot;]</value>
+      <value>//a[@href='/my/dashboard/office-operations']</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>
