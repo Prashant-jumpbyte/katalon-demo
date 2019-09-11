@@ -76,7 +76,7 @@ class ReadSpreadsheet {
 	/** Global instance of the {@link FileDataStoreFactory}. */
 	private static FileDataStoreFactory DATA_STORE_FACTORY;
 
-	private static final String Resource_Path = '/home/appgambit/Katalon Studio/Sosi1-katalon/Keywords/com/java/utilily/client_secret_2.json';
+	private static final String Resource_Path = '/var/lib/jenkins/workspace/Katalon_demo/Keywords/com/java/utilily/client_secret_2.json';
 
 	/** Global instance of the JSON factory. */
 	private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
