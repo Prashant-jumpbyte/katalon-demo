@@ -14,10 +14,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-def sheetData_LOGIN = CustomKeywords.'com.java.utilily.ReadSpreadsheet.getSpreadSheetRecords'('1oEo8aYNFOxjolbeD_ec7JAF1K764o9A-Einppgdz1_A', 
-    'Login!A2:Z')
 
-System.out.println('Sheet DATA LOGIN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' + sheetData_LOGIN)
 
 def sheetData_ECOI = CustomKeywords.'com.java.utilily.ReadSpreadsheet.getSpreadSheetRecords'('1oEo8aYNFOxjolbeD_ec7JAF1K764o9A-Einppgdz1_A', 
     'Ecoi!A2:Z')
