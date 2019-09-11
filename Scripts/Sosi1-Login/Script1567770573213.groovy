@@ -14,28 +14,35 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-def info = WebUI.callTestCase(findTestCase('PrepareData'), [:], FailureHandling.STOP_ON_FAILURE)
+List<List> sheetData_LOGIN = CustomKeywords.'com.java.utilily.ReadSpreadsheet.getSpreadSheetRecords'('1oEo8aYNFOxjolbeD_ec7JAF1K764o9A-Einppgdz1_A', 
+    'Login!A2:Z')
 
-def Email = info.Email
-
-def Password = info.Password
-
-def Status = info.Status
-
-def Type = info.Type
-
+//def info = WebUI.callTestCase(findTestCase('PrepareData'), [:], FailureHandling.STOP_ON_FAILURE)
+//
+//def Email = info.Email
+//
+//def Password = info.Password
+//
+//def Status = info.Status
+//
+//def Type = info.Type
 WebUI.openBrowser('')
 
 WebUI.navigateToUrl('http://ec2-3-214-106-151.compute-1.amazonaws.com/login')
 
-WebUI.setText(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/input_Email_email'), Email)
+for (int index = 0; index < sheetData_LOGIN.size(); index++) {
+	
+    WebUI.clearText(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/input_Email_email'))
 
-WebUI.setText(findTestObject('Page_SOSI1/input_Password_password'), Password)
+    WebUI.setText(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/input_Email_email'), sheetData_LOGIN.get(
+            index).get(0).toString())
 
-WebUI.click(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/button_Login'))
+    WebUI.clearText(findTestObject('Page_SOSI1/input_Password_password'))
 
-WebUI.verifyElementPresent(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/span_Dhaval Nagar_caret'), 
-    0)
+    WebUI.setText(findTestObject('Page_SOSI1/input_Password_password'), sheetData_LOGIN.get(index).get(1).toString())
 
-WebUI.closeBrowser()
+    WebUI.click(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/button_Login'))
 
+    WebUI.verifyElementPresent(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/span_Dhaval Nagar_caret'), 
+        0)
+}

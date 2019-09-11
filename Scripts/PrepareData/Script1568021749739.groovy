@@ -14,17 +14,20 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
-def info = [('Email') : '', ('Password') : '', ('Status') : '', ('Type') : '']
+def info = [('Login') : [('Email') : '', ('Password') : '', ('Status') : '', ('Type') : ''], ('Ecoi') : [('Ecoi') : '']]
 
-def data = TestDataFactory.findTestData('Data Files/Sosi1_data')
+def dataLogin = TestDataFactory.findTestData('Sosi1_Login_Data')
 
-info.Email = data.getValue(1, 1)
+info.Login.Email = dataLogin.getValue(1, 1)
 
-info.Password = data.getValue(2, 1)
+info.Login.Password = dataLogin.getValue(2, 1)
 
-info.Status = data.getValue(3, 1)
+info.Login.Status = dataLogin.getValue(3, 1)
 
-info.Type = data.getValue(3, 1)
+info.Login.Type = dataLogin.getValue(3, 1)
+
+def dataEcoi = TestDataFactory.findTestData('Sosi1_Ecoi_Data')
+
+info.Ecoi.Ecoi = dataEcoi.getValue(3, 1)
 
 return info
-

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
-   <description></description>
+   <description>This is Login Test case for Sosi1.</description>
    <name>Sosi1-Login</name>
-   <tag></tag>
+   <tag>Sosi1-Login</tag>
    <comment></comment>
    <testCaseGuid>9018e1fa-9aeb-43c8-b989-11620feaa759</testCaseGuid>
 </TestCaseEntity>

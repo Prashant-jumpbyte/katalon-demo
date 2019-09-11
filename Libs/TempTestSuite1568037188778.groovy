@@ -28,8 +28,8 @@ DriverCleanerCollector.getInstance().addDriverCleaner(new com.kms.katalon.core.c
 
 
 
-RunConfiguration.setExecutionSettingFile("/home/appgambit/Katalon Studio/Sosi1-katalon/Reports/20190909_182920/Sosi1-Suite/20190909_182920/execution.properties")
+RunConfiguration.setExecutionSettingFile("/home/appgambit/Katalon Studio/Sosi1-katalon/Reports/20190909_192308/Sosi1-Suite/20190909_192308/execution.properties")
 
 TestCaseMain.beforeStart()
 
-TestCaseMain.startTestSuite('Test Suites/Sosi1-Suite', suiteProperties, new File("/home/appgambit/Katalon Studio/Sosi1-katalon/Reports/20190909_182920/Sosi1-Suite/20190909_182920/testCaseBinding"))
+TestCaseMain.startTestSuite('Test Suites/Sosi1-Suite', suiteProperties, new File("/home/appgambit/Katalon Studio/Sosi1-katalon/Reports/20190909_192308/Sosi1-Suite/20190909_192308/testCaseBinding"))

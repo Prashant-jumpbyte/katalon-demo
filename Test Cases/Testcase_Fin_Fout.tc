@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
-   <description></description>
-   <name>Sosi1-CourtOps</name>
-   <tag></tag>
+   <description>This is The Testcase for Fin then direct Fout only.</description>
+   <name>Testcase_Fin_Fout</name>
+   <tag>Testcase_Fin_Fout</tag>
    <comment></comment>
    <testCaseGuid>d737a5b8-d550-4f09-963b-735914b8b86c</testCaseGuid>
 </TestCaseEntity>

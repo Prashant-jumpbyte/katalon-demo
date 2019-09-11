@@ -20,6 +20,6 @@
       <guid>7a705efc-53d3-4ea3-a25b-cc9ab56e0b11</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/Sosi1-CourtOps</testCaseId>
+      <testCaseId>Test Cases/Testcase_Fin_Fout</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>
