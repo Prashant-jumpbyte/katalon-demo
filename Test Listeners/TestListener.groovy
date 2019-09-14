@@ -13,7 +13,6 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
 
-import internal.GlobalVariable as GlobalVariable
 import org.testng.IInvokedMethod
 import org.testng.ITestContext
 import org.testng.ITestNGMethod

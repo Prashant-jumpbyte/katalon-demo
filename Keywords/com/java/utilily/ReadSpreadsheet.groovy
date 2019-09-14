@@ -29,9 +29,6 @@ import org.openqa.selenium.WebElement
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.By
 
-import com.kms.katalon.core.mobile.keyword.internal.MobileDriverFactory
-import com.kms.katalon.core.webui.driver.DriverFactory
-
 import com.kms.katalon.core.testobject.RequestObject
 import com.kms.katalon.core.testobject.ResponseObject
 import com.kms.katalon.core.testobject.ConditionType
@@ -76,7 +73,8 @@ class ReadSpreadsheet {
 	/** Global instance of the {@link FileDataStoreFactory}. */
 	private static FileDataStoreFactory DATA_STORE_FACTORY;
 
-	private static final String Resource_Path = '/var/lib/jenkins/workspace/Katalon_demo/Keywords/com/java/utilily/client_secret_2.json';
+		private static final String Resource_Path = '/var/lib/jenkins/workspace/Katalon_demo/Keywords/com/java/utilily/client_secret_2.json';
+	// private static final String Resource_Path = '/home/appgambit/Katalon Studio/Sosi1-katalon/Keywords/com/java/utilily/client_secret_2.json';
 
 	/** Global instance of the JSON factory. */
 	private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
@@ -111,26 +109,18 @@ class ReadSpreadsheet {
 	public static Credential authorize() throws IOException {
 		// Load client secrets.
 
-
-
 		File currentFolder = new File (System.getProperty("user.dir"));
 		System.out.println currentFolder.toString()
-		//InputStream inputStream       = ReadGoogleSheets.class.getResourceAsStream('D://katalon//client_secrets.json');
+		//InputStream inputStream       = ReadGoogleSheets.class.getResourceAsStream('/home/appgambit/Katalon Studio/Sosi1-katalon/Keywords/com/java/utilily/client_secret_2.json');
 
-		//InputStream inn = ReadGoogleSheets.class.getResourceAsStream("D:\\katalon\\client_secrets.json")
+		//InputStream inn = ReadGoogleSheets.class.getResourceAsStream("/home/appgambit/Katalon Studio/Sosi1-katalon/Keywords/com/java/utilily/client_secret_2.json")
 
 		//	Reader      inputStreamReader = new InputStreamReader(inn);
 
 		clientSecrets = LoadClientSecrets();
 
-
-
-
 		// Build flow and trigger user authorization request.
 		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES).setDataStoreFactory(DATA_STORE_FACTORY).build();
-
-
-
 
 		def Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
 		//	System.out.println("Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
@@ -146,8 +136,6 @@ class ReadSpreadsheet {
 
 			clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(inputStream));
 
-
-
 			return clientSecrets;
 		}
 		catch (Exception e) {
@@ -155,10 +143,8 @@ class ReadSpreadsheet {
 			e.printStackTrace();
 		}
 
-
 		return clientSecrets;
 	}
-
 
 	static GoogleClientSecrets getClientCredential() throws IOException {
 		if (clientSecrets == null) {
@@ -166,15 +152,11 @@ class ReadSpreadsheet {
 		return clientSecrets;
 	}
 
-
-
-
 	/**
 	 * Build and return an authorized Sheets API client service.
 	 * @return an authorized Sheets API client service
 	 * @throws IOException
 	 */
-
 
 	public static Sheets getSheetsService() throws IOException {
 		Credential credential = authorize();
