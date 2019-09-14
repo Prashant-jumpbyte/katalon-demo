@@ -12,7 +12,6 @@ import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
-import org.openqa.selenium.Keys as Keys
 
 def sheetData_ECOI = CustomKeywords.'com.java.utilily.ReadSpreadsheet.getSpreadSheetRecords'('1oEo8aYNFOxjolbeD_ec7JAF1K764o9A-Einppgdz1_A', 
     'Ecoi!A2:Z')
@@ -41,7 +40,7 @@ System.out.println('Sheet DATA ECOI >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' + she
 //WebUI.setText(findTestObject('Page_SOSI1/input_Password_password'), Password)
 //
 //WebUI.click(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/button_Login'))
-if (WebUI.verifyElementNotVisible(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_FINFacility IN'))) {
+if (WebUI.verifyElementNotVisible(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_FINFacility IN'), FailureHandling.CONTINUE_ON_FAILURE)) {
     WebUI.verifyElementPresent(findTestObject('Object Repository/Sosi1.Login/Page_SOSI1/Page_SOSI1/span_Dhaval Nagar_caret'), 
         0)
 
@@ -57,10 +56,8 @@ if (WebUI.verifyElementNotVisible(findTestObject('Object Repository/Sosi1-CourtO
 }
 
 for (int index = 0; index < sheetData_ECOI.size(); index++) {
-    if (sheetData_ECOI.get(index).get(1).toString().equals('Testcase_Fin_Fout') && sheetData_ECOI.get(index).get(3).toString().equals(
+    if (sheetData_ECOI.get(index).get(1).toString().equals('Testcase_Fin') && sheetData_ECOI.get(index).get(3).toString().equals(
         'OSI')) {
-	
-        //FIN Fuctionality calling
         WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_FINFacility IN'))
 
         WebUI.setText(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/input_ECOI_checkInEcoiId'), sheetData_ECOI.get(
@@ -71,46 +68,11 @@ for (int index = 0; index < sheetData_ECOI.size(); index++) {
         WebUI.verifyElementPresent(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/span_ECOI 6503003 Facility IN successful'), 
             0)
 
-        WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_Close'))
-
-        WebUI.delay(3)
-
-        //Fout Fuctionality calling 
-        WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_FOUTFacility OUT'))
-
-        WebUI.setText(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/input_ECOI_checkOutEcoiId'), sheetData_ECOI.get(
-                index).get(2).toString())
-
-        WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_Facility OUT'))
-
-        WebUI.setText(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/textarea_Interpreter was not checked in with Judge Reason required to complete release_form-control ng-untouched ng-dirty ng-valid-parse ng-valid ng-valid-required'), 
-            sheetData_ECOI.get(index).get(13).toString())
-
-        WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_Facility Out (1)'))
-
-        WebUI.setText(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/input_Password_password_1'), sheetData_ECOI.get(
-                index).get(9).toString())
-
-        WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_Submit_1'))
-
-        WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/span_None Selected'))
-
-        WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/label_Respondent Did Not Appear'))
-
-        WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_Release  Facility OUT'))
-
-        WebUI.setText(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/input_Password_password_8'), sheetData_ECOI.get(
-                index).get(9).toString())
-
-        WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_Submit_2'))
-
-        assert WebUI.verifyElementPresent(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/span_ECOI 6503003 Facility OUT Successful'), 
+        assert WebUI.verifyElementPresent(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/span_ECOI 6503003 Facility IN successful'), 
             0) == true
 
-        WebUI.delay(2)
-
-        WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/FUT_Button_Close'))
+        WebUI.click(findTestObject('Object Repository/Sosi1-CourtOps/Page_SOSI1/button_Close'))
     }
 }
 
-//WebUI.closeBrowser()
+WebUI.closeBrowser()
