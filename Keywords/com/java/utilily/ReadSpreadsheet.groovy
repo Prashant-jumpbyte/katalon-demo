@@ -60,121 +60,60 @@ import java.util.Collections;
 import java.util.List;
 
 class ReadSpreadsheet {
-
-	/** Application name. */
 	private static final String APPLICATION_NAME = "sosi1-data";
-
-	/** Directory to store user credentials for this application. */
-	private static final java.io.File DATA_STORE_DIR = new java.io.File(
-	System.getProperty("user.home"), ".credentials/sheets.googleapis.com-java-quickstart");
-
-	/** Global instance of the {@link FileDataStoreFactory}. */
-	private static FileDataStoreFactory DATA_STORE_FACTORY;
-
-		private static final String Resource_Path = '/var/lib/jenkins/workspace/Katalon_demo/Keywords/com/java/utilily/client_secret_2.json';
-	// private static final String Resource_Path = '/home/appgambit/Katalon Studio/Sosi1-katalon/Keywords/com/java/utilily/client_secret_2.json';
-
-	/** Global instance of the JSON factory. */
 	private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+	private static final String TOKENS_DIRECTORY_PATH = "tokens";
 
-	/** Global instance of the HTTP transport. */
-	private static HttpTransport HTTP_TRANSPORT;
-
-	static GoogleClientSecrets clientSecrets = LoadClientSecrets();
-
-	/** Global instance of the scopes required by this quickstart.
-	 *
-	 * If modifying these scopes, delete your previously saved credentials
-	 * at ~/.credentials/sheets.googleapis.com-java-quickstart
+	/**
+	 * Global instance of the scopes required by this quickstart. If modifying these
+	 * scopes, delete your previously saved tokens/ folder.
 	 */
-	private static final List<String> SCOPES = Arrays.asList(SheetsScopes.SPREADSHEETS_READONLY);
-
-	static {
-		try {
-			HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-			DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
-		} catch (Throwable t) {
-			t.printStackTrace();
-			System.exit(1);
-		}
-	}
-
+	private static final List<String> SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS_READONLY);
+	private static final String CREDENTIALS_FILE_PATH = "client_secret_2.json";
+//	private static final String CREDENTIALS_FILE_PATH = "/var/lib/jenkins/workspace/Katalon_demo/Keywords/com/java/utilily/client_secret_2.json";
 	/**
 	 * Creates an authorized Credential object.
-	 * @return an authorized Credential object.
-	 * @throws IOException
+	 *
+	 * @param HTTP_TRANSPORT The network HTTP Transport.
+	 * @return An authorized Credential object.
+	 * @throws IOException If the credentials.json file cannot be found.
 	 */
-	public static Credential authorize() throws IOException {
+	private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
 		// Load client secrets.
-
-		File currentFolder = new File (System.getProperty("user.dir"));
-		System.out.println currentFolder.toString()
-		//InputStream inputStream       = ReadGoogleSheets.class.getResourceAsStream('/home/appgambit/Katalon Studio/Sosi1-katalon/Keywords/com/java/utilily/client_secret_2.json');
-
-		//InputStream inn = ReadGoogleSheets.class.getResourceAsStream("/home/appgambit/Katalon Studio/Sosi1-katalon/Keywords/com/java/utilily/client_secret_2.json")
-
-		//	Reader      inputStreamReader = new InputStreamReader(inn);
-
-		clientSecrets = LoadClientSecrets();
+		InputStream in1 = ReadSpreadsheet.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+		if (in1 == null) {
+			throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
+		}
+		GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in1));
 
 		// Build flow and trigger user authorization request.
-		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES).setDataStoreFactory(DATA_STORE_FACTORY).build();
-
-		def Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
-		//	System.out.println("Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
-		return credential;
-	}
-
-	private static GoogleClientSecrets LoadClientSecrets(){
-
-		try{
-			InputStream inputStream = new FileInputStream(new File(Resource_Path));
-
-			System.out.println("Total file size to read (in bytes) : "+ inputStream.available());
-
-			clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(inputStream));
-
-			return clientSecrets;
-		}
-		catch (Exception e) {
-			System.out.println("Could not load file Client secrets" );
-			e.printStackTrace();
-		}
-
-		return clientSecrets;
-	}
-
-	static GoogleClientSecrets getClientCredential() throws IOException {
-		if (clientSecrets == null) {
-		}
-		return clientSecrets;
+		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, JSON_FACTORY,
+				clientSecrets, SCOPES)
+				.setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
+				.setAccessType("offline").build();
+		LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8889).build();
+		return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
 	}
 
 	/**
-	 * Build and return an authorized Sheets API client service.
-	 * @return an authorized Sheets API client service
-	 * @throws IOException
+	 * Prints the names and majors of students in a sample spreadsheet:
+	 * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
 	 */
-
-	public static Sheets getSheetsService() throws IOException {
-		Credential credential = authorize();
-		return new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
-				.setApplicationName(APPLICATION_NAME)
-				.build();
-	}
-
 	@Keyword
-	def List<List<Object>> getSpreadSheetRecords(String spreadsheetId, String range) throws IOException {
-		Sheets service = getSheetsService();
-		ValueRange response = service.spreadsheets().values()
-				.get(spreadsheetId, range)
-				.execute();
+	public static List<List<Object>> getSpreadSheetRecords(String spreadsheetId,String range) throws IOException, GeneralSecurityException {
+		// Build a new authorized API client service.
+		final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+//		final String spreadsheetId = "1oEo8aYNFOxjolbeD_ec7JAF1K764o9A-Einppgdz1_A";
+
+		Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+				.setApplicationName(APPLICATION_NAME).build();
+		ValueRange response = service.spreadsheets().values().get(spreadsheetId, range).execute();
 		List<List<Object>> values = response.getValues();
-		if (values != null && values.size() != 0) {
-			return values;
-		} else {
+		if (values == null || values.isEmpty()) {
 			System.out.println("No data found.");
 			return null;
+		} else {
+			return values;
 		}
 	}
 }
